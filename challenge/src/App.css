@@ -1,0 +1,20 @@
+
+body{
+  background-color: rgb(244, 248, 255);
+}
+.name{
+  margin: 3px;
+  padding: 5px 10px;
+  float: right;
+  color: white;
+  border-radius: 5px;
+}
+.nameContainer{
+  width: 100%;
+  padding: 10%;
+}
+.nameContainer > div{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
