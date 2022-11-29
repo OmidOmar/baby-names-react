@@ -1,6 +1,6 @@
 import "./App.css";
 import babyNames from "./BabyNamesData.json";
-import {  useState } from "react";
+import { useState } from "react";
 
 let favoriteNames = [];
 
@@ -12,22 +12,35 @@ function App() {
   const [favoriteNamesArray, setFavoriteNamesArray] = useState(favoriteNames);
   const addToFavorite = (e) => {
     let clickedName = e.target.textContent;
-
     favoriteNames = [
       ...favoriteNames,
       data.find((x) => {
         return x.name === clickedName;
       }),
     ];
-
     data = data.filter((x) => {
-      return x.name !== e.target.textContent;
+      return x.name !== clickedName;
+    });
+    setFavoriteNamesArray(favoriteNames);
+    dataSet(data);
+  };
+
+  const rmvFromFavorite = (e) => {
+    let clickedName = e.target.textContent;
+
+    data = [
+      ...data,
+      favoriteNames.find((x) => {
+        return x.name === clickedName;
+      }),
+    ];
+
+    favoriteNames = favoriteNames.filter((x) => {
+      return x.name !== clickedName;
     });
 
     setFavoriteNamesArray(favoriteNames);
-
-    console.log(favoriteNamesArray);
-    dataSet(data);
+    dataSet(data.sort((a, b) => (a.name > b.name ? 1 : -1)));
   };
 
   const search = () => {
@@ -61,7 +74,7 @@ function App() {
             let color = x.sex === "m" ? "info" : "danger";
             return (
               <p
-                onClick={addToFavorite}
+                onClick={rmvFromFavorite}
                 key={i}
                 value={x.name}
                 className={`name bg-${color} m-2 lead align-middle`}
@@ -71,7 +84,7 @@ function App() {
             );
           })}
         </section>
-        <hr/>
+        <hr />
         <div>
           {data.map((x, i) => {
             let color = x.sex === "m" ? "info" : "danger";
@@ -87,7 +100,7 @@ function App() {
             );
           })}
         </div>
-        <hr/>
+        <hr />
       </div>
     </div>
   );
