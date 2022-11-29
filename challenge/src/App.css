@@ -15,16 +15,12 @@ body {
   padding: 0 10%;
 }
 
-.nameContainer > div {
+.nameContainer>div {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
 
-.form-control {
-  width: 300px;
-  margin: 90px auto;
-}
 
 .favorite {
   display: flex;
@@ -34,3 +30,21 @@ body {
 .favorite p {
   margin: auto 0;
 }
+
+.form-group {
+  width: 300px;
+  margin: 90px auto;
+  display: flex;
+}
+
+.form-group button{
+  margin: 0 3px;
+  border: none;
+  border-radius: 2px;
+  padding: 0 10px;
+  color: white;
+}
+.form-group #A{
+  color: rgb(80, 80, 80);
+}
+

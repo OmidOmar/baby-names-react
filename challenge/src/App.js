@@ -44,7 +44,7 @@ function App() {
   };
 
   const search = () => {
-    const filteredData = babyNames.filter((x) => {
+    const filteredData = data.filter((x) => {
       return x.name
         .toLowerCase()
         .indexOf(document.getElementById("searchInput").value.toLowerCase()) >
@@ -53,9 +53,24 @@ function App() {
         : "";
     });
     dataSet(filteredData);
-    console.log(filteredData);
   };
-
+  const filterNamesBySex = (e) => {
+    if (
+      !window.confirm(
+        "By filtering names based on gender all favourite name(s) will removed"
+      )
+    )
+      return;
+    favoriteNames = [];
+    setFavoriteNamesArray(favoriteNames);
+    let clickedButton = e.target.id;
+    let filteredNames = babyNames;
+    if (clickedButton === "B")
+      filteredNames = filteredNames.filter((x) => x.sex === "m");
+    else if (clickedButton === "G")
+      filteredNames = filteredNames.filter((x) => x.sex === "f");
+    dataSet(filteredNames.sort((a, b) => (a.name > b.name ? 1 : -1)));
+  };
   return (
     <div className="App">
       <div className="form-group">
@@ -65,6 +80,15 @@ function App() {
           id="searchInput"
           onInput={search}
         ></input>
+        <button id="A" onClick={filterNamesBySex}>
+          All
+        </button>
+        <button id="G" className="bg-danger" onClick={filterNamesBySex}>
+          Girls
+        </button>
+        <button id="B" className="bg-info" onClick={filterNamesBySex}>
+          Boys
+        </button>
       </div>
 
       <div className="nameContainer">
