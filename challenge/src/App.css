@@ -1,24 +1,36 @@
-
-body{
+body {
   background-color: rgb(244, 248, 255);
 }
-.name{
+
+.name {
   margin: 3px;
   padding: 5px 10px;
   float: right;
   color: white;
   border-radius: 5px;
 }
-.nameContainer{
+
+.nameContainer {
   width: 100%;
   padding: 0 10%;
 }
-.nameContainer > div{
+
+.nameContainer > div {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
-.form-control{
+
+.form-control {
   width: 300px;
   margin: 90px auto;
+}
+
+.favorite {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.favorite p {
+  margin: auto 0;
 }

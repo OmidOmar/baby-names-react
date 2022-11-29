@@ -1,11 +1,35 @@
 import "./App.css";
 import babyNames from "./BabyNamesData.json";
-import { useState } from "react";
+import {  useState } from "react";
+
+let favoriteNames = [];
 
 function App() {
-  const [data, dataSet] = useState(
+  let [data, dataSet] = useState(
     babyNames.sort((a, b) => (a.name > b.name ? 1 : -1))
   );
+
+  const [favoriteNamesArray, setFavoriteNamesArray] = useState(favoriteNames);
+  const addToFavorite = (e) => {
+    let clickedName = e.target.textContent;
+
+    favoriteNames = [
+      ...favoriteNames,
+      data.find((x) => {
+        return x.name === clickedName;
+      }),
+    ];
+
+    data = data.filter((x) => {
+      return x.name !== e.target.textContent;
+    });
+
+    setFavoriteNamesArray(favoriteNames);
+
+    console.log(favoriteNamesArray);
+    dataSet(data);
+  };
+
   const search = () => {
     const filteredData = babyNames.filter((x) => {
       return x.name
@@ -29,17 +53,41 @@ function App() {
           onInput={search}
         ></input>
       </div>
+
       <div className="nameContainer">
+        <section className="favorite">
+          <p>Favorite:</p>
+          {favoriteNamesArray.map((x, i) => {
+            let color = x.sex === "m" ? "info" : "danger";
+            return (
+              <p
+                onClick={addToFavorite}
+                key={i}
+                value={x.name}
+                className={`name bg-${color} m-2 lead align-middle`}
+              >
+                {x.name}
+              </p>
+            );
+          })}
+        </section>
+        <hr/>
         <div>
           {data.map((x, i) => {
             let color = x.sex === "m" ? "info" : "danger";
             return (
-              <p key={i} className={`name bg-${color} m-2 lead align-middle`}>
+              <p
+                onClick={addToFavorite}
+                key={i}
+                value={x.name}
+                className={`name bg-${color} m-2 lead align-middle`}
+              >
                 {x.name}
               </p>
             );
           })}
         </div>
+        <hr/>
       </div>
     </div>
   );
